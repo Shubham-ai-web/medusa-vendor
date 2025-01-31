@@ -5,7 +5,7 @@ import { Pencil } from "@medusajs/icons";
 import { useQuery } from "@tanstack/react-query";
 import { sdk } from "../lib/sdk";
 import { Header } from "../components/header";
-import { VendorProductDrawer } from "../components/vendors/product-vendor-drawer";
+import { VendorProductDrawer } from "../components/product/product-vendor-drawer";
 import { useState } from "react";
 
 type AdminProductBrand = AdminProduct & {
