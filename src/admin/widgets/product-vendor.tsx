@@ -1,6 +1,6 @@
 import { defineWidgetConfig } from "@medusajs/admin-sdk";
 import { DetailWidgetProps, AdminProduct } from "@medusajs/framework/types";
-import { clx, Container, Table, Text } from "@medusajs/ui";
+import { Container, Table } from "@medusajs/ui";
 import { Pencil } from "@medusajs/icons";
 import { useQuery } from "@tanstack/react-query";
 import { sdk } from "../lib/sdk";
@@ -32,7 +32,11 @@ const ProductBrandWidget = ({
   });
 
   const vendorData = (queryResult?.product as AdminProductBrand)?.vendor;
-  const vendors = Array.isArray(vendorData) ? vendorData : vendorData ? [vendorData] : [];
+  const vendors = Array.isArray(vendorData)
+    ? vendorData
+    : vendorData
+    ? [vendorData]
+    : [];
 
   return (
     <Container className="divide-y p-0">
@@ -66,7 +70,7 @@ const ProductBrandWidget = ({
         <Table.Body>
           {vendors.length > 0 ? (
             vendors.map((vendor: any) => (
-              <Table.Row key={vendor.id} >
+              <Table.Row key={vendor.id}>
                 <Table.Cell>{vendor.email}</Table.Cell>
               </Table.Row>
             ))
