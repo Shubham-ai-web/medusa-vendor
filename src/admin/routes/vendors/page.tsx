@@ -21,7 +21,7 @@ type Vendor = {
   phone: string;
   address: string;
 };
-type VendorsResponse = {
+export type VendorsResponse = {
   vendors: Vendor[];
   count: number;
   limit: number;
@@ -29,7 +29,6 @@ type VendorsResponse = {
 };
 
 const VendorsPage = () => {
-  // TODO retrieve brands
   const columnHelper = createDataTableColumnHelper<Vendor>();
 
   const columns = [
@@ -88,7 +87,6 @@ const VendorsPage = () => {
 
   return (
     <Container className="divide-y p-0">
-      {/* TODO show vendors */}
       <DataTable instance={table}>
         <DataTable.Toolbar className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
           <Heading>Vendors</Heading>
