@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { sdk } from "../../lib/sdk";
 import { useMemo, useState } from "react";
 import { VendorCreateDrawer } from "../../components/vendors/create-vendor-drawer";
+import { VendorActionsMenu } from "../../components/vendors/vendor-actions-drawer";
 
 type Vendor = {
   id: string;
@@ -63,6 +64,7 @@ const VendorsPage = () => {
             <Table.HeaderCell>Email</Table.HeaderCell>
             <Table.HeaderCell>Phone</Table.HeaderCell>
             <Table.HeaderCell>Address</Table.HeaderCell>
+            <Table.HeaderCell>Actions</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -76,6 +78,12 @@ const VendorsPage = () => {
               <Table.Cell>{vendor.email}</Table.Cell>
               <Table.Cell>{vendor.phone}</Table.Cell>
               <Table.Cell>{vendor.address}</Table.Cell>
+              <Table.Cell onClick={(e) => e.stopPropagation()}>
+                    <VendorActionsMenu
+                      vendor={vendor}
+                      refetch={refetch}
+                    />
+                  </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
