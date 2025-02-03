@@ -29,7 +29,7 @@ export function VendorUpdateDrawer({
     <Drawer open={open} onOpenChange={setOpen}>
       <Drawer.Content className="z-50">
         <Drawer.Header>
-          <Drawer.Title>Edit Company</Drawer.Title>
+          <Drawer.Title>Edit Vendor</Drawer.Title>
         </Drawer.Header>
 
         <VendorForm
