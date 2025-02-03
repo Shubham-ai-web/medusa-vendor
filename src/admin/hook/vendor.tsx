@@ -105,3 +105,40 @@ export const useDeleteVendor = () => {
 
   return { mutate, loading, error };
 };
+
+export const useUpdateVendor = (
+  vendorId: string
+): {
+  mutate: (vendor: any) => Promise<any>;
+  loading: boolean;
+  error: Error | null;
+} => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const mutate = async (vendor: any) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const result: any = await sdk.client.fetch(`/admin/vendors/${vendorId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: vendor,
+      });
+
+      return result;
+    } catch (err) {
+      setError(
+        err instanceof Error ? err : new Error("An unknown error occurred")
+      );
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { mutate, loading, error };
+};

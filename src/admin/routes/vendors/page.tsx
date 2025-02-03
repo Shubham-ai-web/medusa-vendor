@@ -79,11 +79,8 @@ const VendorsPage = () => {
               <Table.Cell>{vendor.phone}</Table.Cell>
               <Table.Cell>{vendor.address}</Table.Cell>
               <Table.Cell onClick={(e) => e.stopPropagation()}>
-                    <VendorActionsMenu
-                      vendor={vendor}
-                      refetch={refetch}
-                    />
-                  </Table.Cell>
+                <VendorActionsMenu vendor={vendor} refetch={refetch} />
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

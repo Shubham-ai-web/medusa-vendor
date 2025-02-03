@@ -3,6 +3,7 @@ import { DropdownMenu, IconButton, toast } from "@medusajs/ui";
 import { useState } from "react";
 import { useDeleteVendor } from "../../hook/vendor";
 import { DeletePrompt } from "../common/delete-prompt";
+import { VendorUpdateDrawer } from "./vendor-update-drawer";
 
 export const VendorActionsMenu = ({
   vendor,
@@ -12,12 +13,11 @@ export const VendorActionsMenu = ({
   refetch: () => void;
 }) => {
   const [editOpen, setEditOpen] = useState(false);
-  const [customerGroupOpen, setCustomerGroupOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const { mutate: mutateDelete, loading: loadingDelete } = useDeleteVendor();
 
   const handleDelete = async () => {
-    await mutateDelete( vendor.id);
+    await mutateDelete(vendor.id);
     refetch();
     toast.success(`Company ${vendor.name} deleted successfully`);
   };
@@ -48,7 +48,13 @@ export const VendorActionsMenu = ({
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu>
-       <DeletePrompt
+      <VendorUpdateDrawer
+        vendor={vendor}
+        refetch={refetch}
+        open={editOpen}
+        setOpen={setEditOpen}
+      />
+      <DeletePrompt
         handleDelete={handleDelete}
         loading={loadingDelete}
         open={deleteOpen}
