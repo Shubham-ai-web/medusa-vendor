@@ -32,7 +32,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
     const query = req.scope.resolve("query");
 
     const { data: vendors, metadata } = await query.graph({
-      entity: "vendor",
+      entity: "vendor", 
       ...req.queryConfig,
       fields: [...(req.queryConfig?.fields || []), "*", "products.*"],
     });
