@@ -11,8 +11,7 @@ export const deleteBrandStep = createStep(
         const vendorModuleService: VendorModuleService = container.resolve(
           VENDOR_MODULE
         )
-        // await vendorModuleService.softDeleteVendors(ids)
-        await vendorModuleService.deleteVendors(ids)
+        await vendorModuleService.softDeleteVendors(ids)
         return new StepResponse(ids, ids)
       },
         async (ids: string, { container }) => {
