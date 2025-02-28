@@ -1,6 +1,6 @@
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
-import { LOWSTOCK_MODULE } from "src/modules/lowstock"
-import LowstockModuleService from "src/modules/lowstock/service"
+import { LOWSTOCK_MODULE } from "../../../modules/lowstock"
+import LowstockModuleService from "../../../modules/lowstock/service"
 
 export const getDistinctSubscriptionsStep = createStep(
     "get-distinct-subscriptions",

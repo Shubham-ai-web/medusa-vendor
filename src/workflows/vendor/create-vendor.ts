@@ -5,8 +5,8 @@ import {
   WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk";
 import { emitEventStep } from "@medusajs/medusa/core-flows";
-import { VENDOR_MODULE } from "src/modules/vendor";
-import VendorModuleService from "src/modules/vendor/service";
+import { VENDOR_MODULE } from "../../modules/vendor";
+import VendorModuleService from "../../modules/vendor/service";
 
 export type CreateVendorInput = {
   first_name: string;
@@ -14,6 +14,13 @@ export type CreateVendorInput = {
   email: string;
   phone: string;
   address: string;
+  address2?: string;
+  city: string;
+  state: string;
+  country: string;
+  postal_code?: string;
+  company_name?: string;
+  tax_id?: string;
 };
 
 type CreateVendorWorkflowInput = {
@@ -22,6 +29,13 @@ type CreateVendorWorkflowInput = {
   email: string;
   phone: string;
   address: string;
+  address2?: string;
+  city: string;
+  state: string;
+  country: string;
+  postal_code?: string;
+  company_name?: string;
+  tax_id?: string;
 };
 export const createVendorStep = createStep(
   "create-vendor-step",

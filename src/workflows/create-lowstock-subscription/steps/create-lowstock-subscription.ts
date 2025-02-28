@@ -1,6 +1,6 @@
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk";
-import { LOWSTOCK_MODULE } from "src/modules/lowstock";
-import LowstockModuleService from "src/modules/lowstock/service";
+import { LOWSTOCK_MODULE } from "../../../modules/lowstock";
+import LowstockModuleService from "../../../modules/lowstock/service";
 
 type CreateLowstockSubscriptionStepInput = {
   variant_id: string;
@@ -24,8 +24,10 @@ export const createLowstockSubscriptionStep = createStep(
     const lowstockModuleService: LowstockModuleService =
       container.resolve(LOWSTOCK_MODULE);
 
-    await lowstockModuleService.deleteLowstockSubscriptions(
-      lowstockSubscription.id
-    );
+    if(lowstockSubscription) {
+        await lowstockModuleService.deleteLowstockSubscriptions(
+          lowstockSubscription.id
+        );
+    }
   }
 );

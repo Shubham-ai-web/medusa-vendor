@@ -57,6 +57,7 @@ export const useCreateVendor = (): {
   const mutate = async (vendor: any) => {
     setLoading(true);
     setError(null);
+    console.log("vendor", vendor);
 
     try {
       const result: any = await sdk.client.fetch("/admin/vendors", {

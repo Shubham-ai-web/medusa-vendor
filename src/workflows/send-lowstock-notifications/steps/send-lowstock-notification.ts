@@ -1,6 +1,6 @@
 import { InferTypeOf, ProductVariantDTO } from "@medusajs/framework/types"
 import { createStep } from "@medusajs/framework/workflows-sdk"
-import LowstockSubscription from "src/modules/lowstock/models/lowstock-subscription"
+import LowstockSubscription from "../../../modules/lowstock/models/lowstock-subscription"
 
 type SendLowstockNotificationStepInput = (InferTypeOf<typeof LowstockSubscription> & {
     product_variant?: ProductVariantDTO

@@ -3,7 +3,7 @@ import {
   MedusaResponse,
 } from "@medusajs/framework";
 import { MedusaError } from "@medusajs/framework/utils";
-import { createLowstockSubscriptionWorkflow } from "src/workflows/create-lowstock-subscription";
+import { createLowstockSubscriptionWorkflow } from "../../../workflows/create-lowstock-subscription";
 
 type PostStoreCreateLowstockSubscription = {
   variant_id: string;

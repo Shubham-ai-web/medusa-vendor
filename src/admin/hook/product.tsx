@@ -3,6 +3,7 @@ import { sdk } from "../lib/sdk";
 
 export const useUpdateProductVendor = (): {
   mutate: (vendor: any) => Promise<any>;
+  mutateDelete: (vendor: any) => Promise<any>;
   loading: boolean;
   error: Error | null;
 } => {
@@ -52,5 +53,36 @@ export const useUpdateProductVendor = (): {
     }
   };
 
-  return { mutate, loading, error };
+  const mutateDelete = async (vendor: VendorInput): Promise<ProductResponse> => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const result = await sdk.client.fetch<ProductResponse>(
+          `/admin/products/${vendor.product_id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: {
+              additional_data: {
+                vendor_id: vendor.vendor_id,
+              },
+            },
+          }
+      );
+
+      return result;
+    } catch (err) {
+      setError(
+          err instanceof Error ? err : new Error("An unknown error occurred")
+      );
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { mutate, mutateDelete, loading, error };
 };

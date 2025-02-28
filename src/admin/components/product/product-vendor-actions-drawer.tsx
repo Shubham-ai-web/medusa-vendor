@@ -1,25 +1,23 @@
-import { EllipsisHorizontal, PencilSquare, Trash } from "@medusajs/icons";
+import { EllipsisHorizontal, Trash } from "@medusajs/icons";
 import { DropdownMenu, IconButton, toast } from "@medusajs/ui";
 import { useState } from "react";
 import { useDeleteVendor } from "../../hook/vendor";
 import { DeletePrompt } from "../common/delete-prompt";
-import { VendorUpdateDrawer } from "./vendor-update-drawer";
 
-export const VendorActionsMenu = ({
+export const ProductVendorActionsMenu = ({
   vendor,
   refetch,
 }: {
   vendor: any;
   refetch: () => void;
 }) => {
-  const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const { mutate: mutateDelete, loading: loadingDelete } = useDeleteVendor();
 
   const handleDelete = async () => {
     await mutateDelete(vendor.id);
     refetch();
-    toast.success(`Company ${vendor.name} deleted successfully`);
+    toast.success(`Vendor ${vendor.name} removed successfully`);
   };
 
   return (
@@ -33,14 +31,6 @@ export const VendorActionsMenu = ({
         <DropdownMenu.Content>
           <DropdownMenu.Item
             className="gap-x-2"
-            onClick={() => setEditOpen(true)}
-          >
-            <PencilSquare />
-            Edit
-          </DropdownMenu.Item>
-          <DropdownMenu.Separator />
-          <DropdownMenu.Item
-            className="gap-x-2"
             onClick={() => setDeleteOpen(true)}
           >
             <Trash />
@@ -48,12 +38,6 @@ export const VendorActionsMenu = ({
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu>
-      <VendorUpdateDrawer
-        vendor={vendor}
-        refetch={refetch}
-        open={editOpen}
-        setOpen={setEditOpen}
-      />
       <DeletePrompt
         handleDelete={handleDelete}
         loading={loadingDelete}

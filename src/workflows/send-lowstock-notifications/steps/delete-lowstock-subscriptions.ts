@@ -1,8 +1,8 @@
 import { InferTypeOf } from "@medusajs/framework/types"
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk"
-import { LOWSTOCK_MODULE } from "src/modules/lowstock"
-import LowstockSubscription from "src/modules/lowstock/models/lowstock-subscription"
-import LowstockModuleService from "src/modules/lowstock/service"
+import { LOWSTOCK_MODULE } from "../../../modules/lowstock"
+import LowstockSubscription from "../../../modules/lowstock/models/lowstock-subscription"
+import LowstockModuleService from "../../../modules/lowstock/service"
 
 type DeleteLowstockSubscriptionsStepInput = InferTypeOf<typeof LowstockSubscription>[]
 

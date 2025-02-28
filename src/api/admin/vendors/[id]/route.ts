@@ -3,7 +3,7 @@ import {
   MedusaResponse,
 } from "@medusajs/framework";
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
-import { updateVendorWorkflow } from "src/workflows/vendor/update-vendor";
+import { updateVendorWorkflow } from "../../../../workflows/vendor/update-vendor";
 import { PostAdminUpdateVendorType } from "../validators";
 
 export const POST = async (

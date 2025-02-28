@@ -2,8 +2,8 @@ import { createProductsWorkflow, updateProductsWorkflow } from "@medusajs/medusa
 import { StepResponse } from "@medusajs/framework/workflows-sdk";
 import { Modules } from "@medusajs/framework/utils";
 import { LinkDefinition } from "@medusajs/framework/types";
-import { VENDOR_MODULE } from "src/modules/vendor";
-import VendorModuleService from "src/modules/vendor/service";
+import { VENDOR_MODULE } from "../../modules/vendor";
+import VendorModuleService from "../../modules/vendor/service";
 
 updateProductsWorkflow.hooks.productsUpdated(
     async ({ products, additional_data }, { container }) => {
