@@ -65,7 +65,7 @@ const ProductBrandWidget = ({
             <ul className="divide-y">
                 {vendors.length > 0 ? (
                     vendors.map((vendor: any) => (
-                        <li className="rounded-lg flex flex-row justify-between p-4 text-body-color dark:text-dark-6 flex text-sm bg-ui-bg-base hover:bg-ui-bg-base-hover">
+                        <li className="rounded-lg flex-row justify-between p-4 text-body-color dark:text-dark-6 flex text-sm bg-ui-bg-base hover:bg-ui-bg-base-hover">
                             <span>{`${vendor.first_name} ${vendor.last_name} <${vendor.email}>`}</span>
                             <Button variant="danger" size="small" title="Unlink Vendor"><Trash /></Button>
                         </li>
