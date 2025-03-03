@@ -14,6 +14,7 @@ const schema = zod.object({
   address:      zod.string().min(2, "Address line 1 is required"),
   address2:     zod.string().nullable().transform((val) => val ?? ""),
   city:         zod.string().min(2, "City is required"),
+  postal_code:  zod.string().min(2, "Postal code is required"),
   state:        zod.string().min(2, "State is required"),
   country:      zod.string().min(2, "Country is required"),
   phone:        zod.string().min(2, "Phone is required"),
@@ -43,6 +44,7 @@ export function VendorUpdateDrawer({
       address:      "",
       address2:     "",
       city:         "",
+      postal_code:  "",
       state:        "",
       country:      "",
       phone:        "",
@@ -66,7 +68,7 @@ export function VendorUpdateDrawer({
       reset(sanitizedData);
       clearErrors();
       refetch();
-      toast.success(`Vendor ${formData.name} updated successfully`);
+      toast.success(`Vendor "${formData.company_name}" updated successfully`);
     });
   };
 
@@ -76,7 +78,7 @@ export function VendorUpdateDrawer({
         <Drawer.Header>
           <Drawer.Title>Edit Vendor</Drawer.Title>
         </Drawer.Header>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-1 flex-col overflow-hidden">
           <VendorForm
               loading={loading}
               error={error}

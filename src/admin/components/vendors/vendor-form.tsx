@@ -20,8 +20,8 @@ export function VendorForm({
 
     return (
         <>
-            <Drawer.Body className="p-4">
-                <div className="flex flex-col gap-2">
+            <Drawer.Body className="px-6 py-4 flex flex-1 flex-col gap-y-8 overflow-y-auto">
+                <div className="flex flex-col gap-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex flex-col space-y-2">
                             <Label size="xsmall">First Name</Label>
@@ -81,6 +81,15 @@ export function VendorForm({
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex flex-col space-y-2">
+                            <Label size="xsmall">Postal code</Label>
+                            <Input
+                                {...register('postal_code')}
+                                placeholder="12345"
+                            />
+                            {errors.postal_code &&
+                              <span className="text-red-500 text-sm">{errors.postal_code.message}</span>}
+                        </div>
+                        <div className="flex flex-col space-y-2">
                             <Label size="xsmall">City</Label>
                             <Input
                                 {...register('city')}
@@ -89,6 +98,8 @@ export function VendorForm({
                             {errors.city &&
                               <span className="text-red-500 text-sm">{errors.city.message}</span>}
                         </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
                         <div className="flex flex-col space-y-2">
                             <Label size="xsmall">Province / State</Label>
                             <Input
@@ -96,17 +107,17 @@ export function VendorForm({
                                 placeholder="Province / State"
                             />
                             {errors.state &&
-                              <span className="text-red-500 text-sm">{errors.state.message}</span>}
+                                <span className="text-red-500 text-sm">{errors.state.message}</span>}
                         </div>
-                    </div>
-                    <div className="flex flex-col space-y-2">
-                        <Label size="xsmall">Country</Label>
-                        <Input
-                            {...register('country')}
-                            placeholder="Country"
-                        />
-                        {errors.country &&
-                          <span className="text-red-500 text-sm">{errors.country.message}</span>}
+                        <div className="flex flex-col space-y-2">
+                            <Label size="xsmall">Country</Label>
+                            <Input
+                                {...register('country')}
+                                placeholder="Country"
+                            />
+                            {errors.country &&
+                              <span className="text-red-500 text-sm">{errors.country.message}</span>}
+                        </div>
                     </div>
                     <div className="flex flex-col space-y-2">
                         <Label size="xsmall">Phone</Label>
@@ -125,16 +136,18 @@ export function VendorForm({
                     </div>
                 </div>
             </Drawer.Body>
-            <Drawer.Footer>
-                <Drawer.Close asChild>
-                    <Button variant="secondary">Cancel</Button>
-                </Drawer.Close>
-                <Button type="submit" isLoading={loading}>Save</Button>
-                {error && (
-                    <Text className="txt-compact-small text-ui-fg-warning">
-                        Error: {error?.message}
-                    </Text>
-                )}
+            <Drawer.Footer className="border-ui-border-base flex items-center justify-end space-x-2 overflow-y-auto border-t px-6 py-4">
+                <div className="flex items-center justify-end gap-x-2">
+                    <Drawer.Close asChild>
+                        <Button variant="secondary">Cancel</Button>
+                    </Drawer.Close>
+                    <Button type="submit" isLoading={loading}>Save</Button>
+                    {error && (
+                        <Text className="txt-compact-small text-ui-fg-warning">
+                            Error: {error?.message}
+                        </Text>
+                    )}
+                </div>
             </Drawer.Footer>
         </>
     );

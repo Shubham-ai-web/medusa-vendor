@@ -1,4 +1,4 @@
-import {Button, Drawer} from "@medusajs/ui";
+import {Button, Drawer, toast} from "@medusajs/ui";
 import {useState} from "react";
 import {useCreateVendor} from "../../hook/vendor";
 import {VendorForm} from "./vendor-form";
@@ -14,6 +14,7 @@ const schema = zod.object({
     address:      zod.string().min(2, "Address line 1 is required"),
     address2:     zod.string().nullable().transform((val) => val ?? ""),
     city:         zod.string().min(2, "City is required"),
+    postal_code:  zod.string().min(2, "Postal code is required"),
     state:        zod.string().min(2, "State is required"),
     country:      zod.string().min(2, "Country is required"),
     phone:        zod.string().min(2, "Phone is required"),
@@ -32,6 +33,7 @@ export function VendorCreateDrawer({refetch}: { refetch: () => void }) {
             company_name: "",
             address:      "",
             city:         "",
+            postal_code:  "",
             state:        "",
             country:      "",
             phone:        "",
@@ -48,6 +50,7 @@ export function VendorCreateDrawer({refetch}: { refetch: () => void }) {
         reset();
         clearErrors();
         refetch();
+        toast.success(`Vendor "${formData.company_name}" created successfully`);
     };
 
     return (
@@ -58,11 +61,11 @@ export function VendorCreateDrawer({refetch}: { refetch: () => void }) {
                     Create
                 </Button>
             </Drawer.Trigger>
-            <Drawer.Content className="overflow-y-auto">
+            <Drawer.Content>
                 <Drawer.Header>
                     <Drawer.Title>Create Company</Drawer.Title>
                 </Drawer.Header>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-1 flex-col overflow-hidden">
                     <VendorForm
                         loading={loading}
                         error={error}
