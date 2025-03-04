@@ -1,11 +1,11 @@
 import { Button, Drawer, toast } from "@medusajs/ui";
 import { useState } from "react";
-import { useCreateVendor } from "../../hook/vendor";
+import { useCreateVendor } from "../../hooks/vendor";
 import { VendorForm } from "./vendor-form";
 import { useForm } from "react-hook-form";
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCountries } from "../../hook/countries";
+import { useCountries } from "../../hooks/countries";
 
 const schema = zod.object( {
     first_name: zod.string().min( 2, "First name is required" ),
@@ -73,12 +73,12 @@ export function VendorCreateDrawer( { refetch }: { refetch: () => void } ) {
         toast.success( `Vendor "${ formData.company_name }" created successfully` );
     };
 
-    const handleOpenChange = (isOpen: boolean) => {
-        setOpen(isOpen);
-        if (!isOpen) {
-          reset(); 
+    const handleOpenChange = ( isOpen: boolean ) => {
+        setOpen( isOpen );
+        if ( !isOpen ) {
+            reset();
         }
-      };
+    };
     return (
         <Drawer open={ open } onOpenChange={ handleOpenChange }>
             <Drawer.Trigger asChild>
