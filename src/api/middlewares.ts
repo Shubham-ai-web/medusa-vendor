@@ -11,13 +11,6 @@ export default defineMiddlewares({
   routes: [
     ...adminMiddlewares,
     {
-      matcher:                 "/admin/products",
-      method:                  [ "POST" ],
-      additionalDataValidator: {
-        vendor_id: z.string().optional(),
-      },
-    },
-    {
       matcher:     "/store/lowstock-subscriptions",
       method:      "POST",
       middlewares: [

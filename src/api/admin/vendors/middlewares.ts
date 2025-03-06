@@ -24,7 +24,6 @@ export const adminVendorMiddlewares: MiddlewareRoute[] = [
             "id",
             "name",
             "company_name",
-            "products.*",
           ],
           isList:   true,
         }

@@ -40,7 +40,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
     const { data: vendors, metadata } = await query.graph({
       entity: "vendor",
       ...req.queryConfig,
-      fields: [ ...(req.queryConfig?.fields || []), "*", "products.*" ],
+      fields: [ ...(req.queryConfig?.fields || []), "*"],
     });
 
     const count = metadata?.count ?? 0;
