@@ -35,6 +35,11 @@ export const adminVendorInventoryMiddlewares: MiddlewareRoute[] = [
     middlewares: [],
   },
   {
+    matcher:     "/admin/vendor-inventory/selection",
+    method:      [ "GET" ],
+    middlewares: [],
+  },
+  {
     matcher:     "/admin/vendor-inventory",
     method:      [ "POST" ],
     middlewares: [

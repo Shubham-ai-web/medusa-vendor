@@ -87,7 +87,7 @@ class VendorInventoryService extends MedusaService({
   async delete(id: string) {
     return await this.baseRepository_.transaction(async (manager: EntityManager) => {
       const item = await this.retrieve(id);
-      await manager.removeAndFlush(item);
+      await manager.remove(item);
       return true;
     });
   }

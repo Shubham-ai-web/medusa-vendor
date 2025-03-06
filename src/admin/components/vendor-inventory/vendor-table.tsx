@@ -117,6 +117,12 @@ export const VendorTable = ({
             <DataTable.Table/>
             <DataTable.Pagination/>
           </>
+        ) : isFetching ? (
+          <div className="flex h-[150px] w-full flex-col items-center justify-center gap-y-4 border-y">
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+              <Spinner className="animate-spin"/>
+            </div>
+          </div>
         ) : (
           <div className="flex h-[150px] w-full flex-col items-center justify-center gap-y-4 border-y">
             <ExclamationCircle className="text-ui-fg-subtle"/>
@@ -127,11 +133,6 @@ export const VendorTable = ({
           </div>
         )}
       </DataTable>
-      {isFetching && !isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <Spinner className="animate-spin"/>
-        </div>
-      )}
     </div>
   );
 };

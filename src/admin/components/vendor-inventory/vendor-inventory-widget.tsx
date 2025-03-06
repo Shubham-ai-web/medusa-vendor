@@ -19,7 +19,7 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
   const [ vendorIdToDelete, setVendorIdToDelete ] = useState<string | null>(null);
   const queryClient = useQueryClient();
   const { data: vendorsData } = useAdminVendors();
-  const PAGE_LIMIT = 10;
+  const PAGE_LIMIT = 1;
   const [ pagination, setPagination ] = useState<DataTablePaginationState>({
     pageSize:  PAGE_LIMIT,
     pageIndex: 0,
@@ -44,6 +44,15 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
                 }),
   });
 
+  const { data: assignedVendorIds } = useQuery<{ vendors: any[] }>({
+    queryKey: [ "assigned-vendor-ids", inventoryItemId ],
+    queryFn:  () =>
+                sdk.client.fetch(`/admin/vendor-inventory/selection`, {
+                  query: {
+                    inventory_item_id: inventoryItemId,
+                  },
+                }),
+  });
   const createMutation = useMutation({
     mutationFn: (newVendorInventory: CreateUpdateVendorInventoryDTO) =>
                   sdk.client.fetch(`/admin/vendor-inventory`, {
@@ -52,6 +61,7 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
                   }),
     onSuccess:  () => {
       queryClient.invalidateQueries({ queryKey: [ "vendor-inventories" ] });
+      queryClient.invalidateQueries({ queryKey: [ "assigned-vendor-ids", inventoryItemId ] });
       setIsAddDrawerOpen(false);
       setEditingItem(null);
       toast.success("Vendor association created successfully");
@@ -69,6 +79,7 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
                   }),
     onSuccess:  () => {
       queryClient.invalidateQueries({ queryKey: [ "vendor-inventories" ] });
+      queryClient.invalidateQueries({ queryKey: [ "assigned-vendor-ids", inventoryItemId ] });
       setEditingItem(null);
       setIsAddDrawerOpen(false);
       toast.success("Vendor association updated successfully");
@@ -85,6 +96,7 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
                   }),
     onSuccess:  () => {
       queryClient.invalidateQueries({ queryKey: [ "vendor-inventories" ] });
+      queryClient.invalidateQueries({ queryKey: [ "assigned-vendor-ids", inventoryItemId ] });
       setPagination((prev) => ({ ...prev, pageIndex: 0 }));
       setIsDeletePromptOpen(false);
       setVendorIdToDelete(null);
@@ -111,10 +123,6 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
     }
   };
 
-  const availableVendors = useMemo(() => {
-    const assignedVendorIds = new Set(paginatedData?.vendor_inventories?.map((vi) => vi.vendor.id) || []);
-    return vendorsData?.vendors?.filter((vendor) => !assignedVendorIds.has(vendor.id)) || [];
-  }, [ vendorsData, paginatedData?.vendor_inventories ]);
   const handleFormSubmit = (data: CreateUpdateVendorInventoryDTO) => {
     if (editingItem) {
       updateMutation.mutate({ id: editingItem.id, ...data });
@@ -156,7 +164,7 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
           }}
           editingItem={editingItem}
           inventoryItemId={inventoryItemId}
-          availableVendors={availableVendors}
+          availableVendors={assignedVendorIds?.vendors || []}
           onSubmit={handleFormSubmit}
           loading={createMutation.isPending || updateMutation.isPending}
           error={createMutation.error || updateMutation.error}
