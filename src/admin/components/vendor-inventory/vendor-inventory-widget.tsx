@@ -5,10 +5,9 @@ import {
 } from "@tanstack/react-query";
 import { Container, DataTablePaginationState, Toaster, toast, DataTableSortingState } from "@medusajs/ui";
 import { useState, useMemo } from "react";
-import { useAdminVendors } from "../../hooks/use-admin-vendors";
 import { sdk } from "../../lib/sdk";
 import { DeletePrompt } from "../common/delete-prompt.tsx";
-import { VendorInventoryResponse, CreateUpdateVendorInventoryDTO, VendorInventory } from "./types";
+import { VendorInventoryResponse, CreateUpdateVendorInventoryDTO, VendorInventory, Vendor } from "./types";
 import { VendorFormDrawer } from "./vendor-form-drawer.tsx";
 import { VendorTable } from "./vendor-table.tsx";
 
@@ -18,7 +17,6 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
   const [ isDeletePromptOpen, setIsDeletePromptOpen ] = useState(false);
   const [ vendorIdToDelete, setVendorIdToDelete ] = useState<string | null>(null);
   const queryClient = useQueryClient();
-  const { data: vendorsData } = useAdminVendors();
   const PAGE_LIMIT = 1;
   const [ pagination, setPagination ] = useState<DataTablePaginationState>({
     pageSize:  PAGE_LIMIT,
@@ -44,8 +42,8 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
                 }),
   });
 
-  const { data: assignedVendorIds } = useQuery<{ vendors: any[] }>({
-    queryKey: [ "assigned-vendor-ids", inventoryItemId ],
+  const { data: assignedVendorIds } = useQuery<{ vendors: Vendor[] }>({
+    queryKey: [ "unassigned-vendor", inventoryItemId ],
     queryFn:  () =>
                 sdk.client.fetch(`/admin/vendor-inventory/selection`, {
                   query: {
@@ -61,7 +59,7 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
                   }),
     onSuccess:  () => {
       queryClient.invalidateQueries({ queryKey: [ "vendor-inventories" ] });
-      queryClient.invalidateQueries({ queryKey: [ "assigned-vendor-ids", inventoryItemId ] });
+      queryClient.invalidateQueries({ queryKey: [ "unassigned-vendor", inventoryItemId ] });
       setIsAddDrawerOpen(false);
       setEditingItem(null);
       toast.success("Vendor association created successfully");
@@ -79,7 +77,7 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
                   }),
     onSuccess:  () => {
       queryClient.invalidateQueries({ queryKey: [ "vendor-inventories" ] });
-      queryClient.invalidateQueries({ queryKey: [ "assigned-vendor-ids", inventoryItemId ] });
+      queryClient.invalidateQueries({ queryKey: [ "unassigned-vendor", inventoryItemId ] });
       setEditingItem(null);
       setIsAddDrawerOpen(false);
       toast.success("Vendor association updated successfully");
@@ -96,7 +94,7 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
                   }),
     onSuccess:  () => {
       queryClient.invalidateQueries({ queryKey: [ "vendor-inventories" ] });
-      queryClient.invalidateQueries({ queryKey: [ "assigned-vendor-ids", inventoryItemId ] });
+      queryClient.invalidateQueries({ queryKey: [ "unassigned-vendor", inventoryItemId ] });
       setPagination((prev) => ({ ...prev, pageIndex: 0 }));
       setIsDeletePromptOpen(false);
       setVendorIdToDelete(null);

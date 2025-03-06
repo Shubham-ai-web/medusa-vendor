@@ -26,7 +26,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
 
     const { data: vendors } = await query.graph({
       entity:  "vendor",
-      fields:  [ "*" ],
+      fields:  [ "id","company_name","email" ],
       filters: {
         id: {
           $nin: vendor_inventories.map(vi => vi.vendor_id),

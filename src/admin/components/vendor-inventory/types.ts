@@ -29,3 +29,17 @@ export type CreateUpdateVendorInventoryDTO = {
   turnaround_days: number;
   is_preferred: boolean;
 };
+
+export type Vendor = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  company_name: string;
+  email: string;
+  phone: string;
+  address: string;
+}
+
+export type VendorsResponse = {
+  vendors: Vendor[]
+}
