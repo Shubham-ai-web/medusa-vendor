@@ -8,19 +8,19 @@ import {
   type DataTablePaginationState,
   type DataTableSortingState,
   type DataTableRowSelectionState,
+  Button,
 } from "@medusajs/ui";
 import { defineRouteConfig } from "@medusajs/admin-sdk";
 import { BuildingsSolid, PencilSquare, Trash } from "@medusajs/icons";
 import { useQuery } from "@tanstack/react-query";
 import { sdk } from "../../lib/sdk";
 import { useMemo, useState } from "react";
-import { VendorCreateDrawer } from "../../components/vendors/vendor-create-drawer";
 import { ActionMenu } from "../../components/common/actions-menu";
 import { VendorUpdateDrawer } from "../../components/vendors/vendor-update-drawer";
 import { DeletePrompt } from "../../components/common/delete-prompt";
 import { useDeleteVendor } from "../../hooks/vendor";
 import { toast } from "@medusajs/ui";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useCountries } from "../../hooks/countries.tsx";
 
 type Vendor = {
@@ -149,12 +149,9 @@ const getActionColumn = (
           {
             actions: [
               {
-                icon:    <PencilSquare/>,
-                label:   "Edit",
-                onClick: () => {
-                  setSelectedVendor(row.original);
-                  setEditOpen(true);
-                },
+                icon:  <PencilSquare/>,
+                label: "Edit",
+                to:    `${row.original.id}/edit`,
               },
               {
                 icon:    <Trash/>,
@@ -178,6 +175,7 @@ const VendorsPage = () => {
     pageSize:  PAGE_LIMIT,
     pageIndex: 0,
   });
+  const navigate = useNavigate();
   const [ sorting, setSorting ] = useState<DataTableSortingState | null>(null);
   const offset = useMemo(() => {
     return pagination.pageIndex * PAGE_LIMIT;
@@ -259,19 +257,18 @@ const VendorsPage = () => {
     isLoading:    false,
   });
 
+  const handleCreate = () => {
+    navigate("/vendors/create");
+  }
   return (
     <>
       <Container className="shadow-elevation-card-rest bg-ui-bg-base w-full rounded-lg divide-y p-0">
         <DataTable instance={table}>
           <DataTable.Toolbar className="flex justify-between px-6 py-4">
             <Heading>Vendors</Heading>
-            {!countriesLoading &&
-              <VendorCreateDrawer
-                refetch={refetch}
-                countriesData={countriesData}
-                countriesLoading={countriesLoading}
-                countriesError={countriesError}/>
-            }
+            <Button asChild variant="secondary" size="small" onClick={handleCreate}>
+              <div>Create Vendor</div>
+            </Button>
           </DataTable.Toolbar>
           {data?.vendors && data?.vendors.length > 0 && (
             <>
@@ -340,7 +337,7 @@ const VendorsPage = () => {
         open={deleteOpen}
         setOpen={setDeleteOpen}
       />
-      <Outlet/>
+      <Outlet context={{ vendors: data?.vendors || [], refetch, countriesData, countriesLoading, countriesError }}/>
     </>
   );
 };
