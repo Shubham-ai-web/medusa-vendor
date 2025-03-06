@@ -24,10 +24,10 @@ export const createLowstockSubscriptionStep = createStep(
     const lowstockModuleService: LowstockModuleService =
       container.resolve(LOWSTOCK_MODULE);
 
-    if(lowstockSubscription) {
-        await lowstockModuleService.deleteLowstockSubscriptions(
-          lowstockSubscription.id
-        );
+    if (lowstockSubscription) {
+      await lowstockModuleService.deleteLowstockSubscriptions(
+        lowstockSubscription.id
+      );
     }
   }
 );

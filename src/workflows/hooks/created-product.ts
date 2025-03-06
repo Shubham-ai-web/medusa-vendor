@@ -18,7 +18,7 @@ createProductsWorkflow.hooks.productsCreated(
           [Modules.PRODUCT]: {
             product_id: product.id,
           },
-          [VENDOR_MODULE]: {
+          [VENDOR_MODULE]:   {
             vendor_id: additional_data.vendor_id,
           },
         });

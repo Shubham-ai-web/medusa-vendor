@@ -3,29 +3,29 @@ import { VENDOR_MODULE } from "../../modules/vendor"
 import VendorModuleService from "../../modules/vendor/service"
 
 type ModuleDeleteVendor = {
-    id: string
-  }
+  id: string
+}
 export const deleteBrandStep = createStep(
-    "delete-vendor",
-    async (ids: string, { container }) => {
-        const vendorModuleService: VendorModuleService = container.resolve(
-          VENDOR_MODULE
-        )
-        await vendorModuleService.softDeleteVendors(ids)
-        return new StepResponse(ids, ids)
-      },
-        async (ids: string, { container }) => {
-            const vendorModuleService: VendorModuleService = container.resolve(
-                VENDOR_MODULE
-            )
-            await vendorModuleService.restoreVendors(ids)
-        }
+  "delete-vendor",
+  async (ids: string, { container }) => {
+    const vendorModuleService: VendorModuleService = container.resolve(
+      VENDOR_MODULE
+    )
+    await vendorModuleService.softDeleteVendors(ids)
+    return new StepResponse(ids, ids)
+  },
+  async (ids: string, { container }) => {
+    const vendorModuleService: VendorModuleService = container.resolve(
+      VENDOR_MODULE
+    )
+    await vendorModuleService.restoreVendors(ids)
+  }
 )
 
 export const deleteVendorWorkflow = createWorkflow(
-    "delete-vendor",
-    (input: ModuleDeleteVendor) => {
-        deleteBrandStep(input.id)
-        return new WorkflowResponse(undefined);
-    }
+  "delete-vendor",
+  (input: ModuleDeleteVendor) => {
+    deleteBrandStep(input.id)
+    return new WorkflowResponse(undefined);
+  }
 )   

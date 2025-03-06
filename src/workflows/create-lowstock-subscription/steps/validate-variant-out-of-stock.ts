@@ -11,10 +11,10 @@ export const validateVariantOutOfStockStep = createStep(
   async ({ variant_id, sales_channel_id }: ValidateVariantOutOfStockStepInput, { container }) => {
     const query = container.resolve("query")
     const availability = await getVariantAvailability(query, {
-      variant_ids: [variant_id],
+      variant_ids: [ variant_id ],
       sales_channel_id,
     })
-    
+
     if (availability[variant_id].availability > 0) {
       throw new MedusaError(
         MedusaError.Types.INVALID_DATA,

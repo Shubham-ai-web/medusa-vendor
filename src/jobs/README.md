@@ -31,8 +31,9 @@ A scheduled job file must export:
 
 - The function to be executed whenever it’s time to run the scheduled job.
 - A configuration object defining the job. It has three properties:
-  - `name`: a unique name for the job.
-  - `schedule`: a [cron expression](https://crontab.guru/).
-  - `numberOfExecutions`: an optional integer, specifying how many times the job will execute before being removed
+    - `name`: a unique name for the job.
+    - `schedule`: a [cron expression](https://crontab.guru/).
+    - `numberOfExecutions`: an optional integer, specifying how many times the job will execute before being removed
 
-The `handler` is a function that accepts one parameter, `container`, which is a `MedusaContainer` instance used to resolve services.
+The `handler` is a function that accepts one parameter, `container`, which is a `MedusaContainer` instance used to
+resolve services.

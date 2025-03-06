@@ -9,11 +9,11 @@ interface DeletePromptProps {
 }
 
 export const DeletePrompt = ({
-  handleDelete,
-  loading,
-  open,
-  setOpen,
-}: DeletePromptProps) => {
+                               handleDelete,
+                               loading,
+                               open,
+                               setOpen,
+                             }: DeletePromptProps) => {
   const handleConfirmDelete = async () => {
     try {
       await handleDelete();
@@ -52,7 +52,7 @@ export const DeletePrompt = ({
             disabled={loading}
             className="min-w-[80px] flex items-center gap-x-1"
           >
-            <Trash className="h-4 w-4" />
+            <Trash className="h-4 w-4"/>
             Delete
           </Button>
         </Prompt.Footer>

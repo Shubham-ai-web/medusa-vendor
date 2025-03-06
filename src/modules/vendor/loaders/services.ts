@@ -7,7 +7,7 @@ export default async function servicesLoader({ container }: LoaderOptions) {
   const baseRepository = new MikroOrmBaseRepository({ container })
 
   container.register({
-    baseRepository: asValue(baseRepository),
+    baseRepository:         asValue(baseRepository),
     vendorInventoryService: asClass(VendorInventoryService)/*.singleton()*/,
   })
 } 

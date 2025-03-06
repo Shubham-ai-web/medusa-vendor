@@ -3,8 +3,8 @@ import { AdminGetVendorInventoryReq, AdminPostVendorInventoryReq, AdminPutVendor
 
 export const adminVendorInventoryMiddlewares: MiddlewareRoute[] = [
   {
-    matcher: "/admin/vendor-inventory",
-    method: ["GET"],
+    matcher:     "/admin/vendor-inventory",
+    method:      [ "GET" ],
     middlewares: [
       validateAndTransformQuery(
         AdminGetVendorInventoryReq,
@@ -23,20 +23,20 @@ export const adminVendorInventoryMiddlewares: MiddlewareRoute[] = [
     ],
   },
   {
-    matcher: "/admin/vendor-inventory/:id",
-    method: ["PUT"],
+    matcher:     "/admin/vendor-inventory/:id",
+    method:      [ "PUT" ],
     middlewares: [
       validateAndTransformBody(AdminPutVendorInventoryReq)
     ],
   },
   {
-    matcher: "/admin/vendor-inventory/:id",
-    method: ["DELETE"],
+    matcher:     "/admin/vendor-inventory/:id",
+    method:      [ "DELETE" ],
     middlewares: [],
   },
   {
-    matcher: "/admin/vendor-inventory",
-    method: ["POST"],
+    matcher:     "/admin/vendor-inventory",
+    method:      [ "POST" ],
     middlewares: [
       validateAndTransformBody(AdminPostVendorInventoryReq)
     ],

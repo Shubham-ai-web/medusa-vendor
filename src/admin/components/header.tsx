@@ -9,19 +9,19 @@ export type HeadingProps = {
   subtitle?: string;
   actions?: (
     | {
-        type: "button";
-        props: React.ComponentProps<typeof Button>;
-        link?: LinkProps;
-      }
+    type: "button";
+    props: React.ComponentProps<typeof Button>;
+    link?: LinkProps;
+  }
     | {
-        type: "action-menu";
-        props: ActionMenuProps;
-      }
+    type: "action-menu";
+    props: ActionMenuProps;
+  }
     | {
-        type: "custom";
-        children: React.ReactNode;
-      }
-  )[];
+    type: "custom";
+    children: React.ReactNode;
+  }
+    )[];
 };
 
 export const Header = ({ title, subtitle, actions = [] }: HeadingProps) => {

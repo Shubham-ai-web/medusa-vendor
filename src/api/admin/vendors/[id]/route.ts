@@ -16,7 +16,7 @@ export const POST = async (
   await updateVendorWorkflow.run({ input: { ...req.body, id } });
 
   const {
-    data: [vendor],
+    data: [ vendor ],
   } = await query.graph(
     {
       entity: "vendor",

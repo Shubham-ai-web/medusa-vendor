@@ -7,14 +7,14 @@ import { Context } from "@medusajs/framework/types"
 class LowstockModuleService extends MedusaService({
   LowstockSubscription,
 }) {
-    @InjectManager()
-    async getUniqueSubscriptions(
-      @MedusaContext() context: Context<EntityManager> = {}
-    ) {
-      return await context.manager?.createQueryBuilder("lowstock_subscription")
-        .select(["variant_id", "sales_channel_id"]).distinct().execute()
-    }
-  
- }
+  @InjectManager()
+  async getUniqueSubscriptions(
+    @MedusaContext() context: Context<EntityManager> = {}
+  ) {
+    return await context.manager?.createQueryBuilder("lowstock_subscription")
+      .select([ "variant_id", "sales_channel_id" ]).distinct().execute()
+  }
+
+}
 
 export default LowstockModuleService

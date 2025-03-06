@@ -17,7 +17,7 @@ type VendorsResponse = {
 
 export const useAdminVendors = () => {
   return useQuery<VendorsResponse>({
-    queryKey: [["vendors"]],
-    queryFn: () => sdk.client.fetch(`/admin/vendors`, {}),
+    queryKey: [ [ "vendors" ] ],
+    queryFn:  () => sdk.client.fetch(`/admin/vendors`, {}),
   })
 } 

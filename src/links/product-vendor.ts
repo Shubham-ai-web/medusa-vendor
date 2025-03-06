@@ -5,7 +5,7 @@ import { defineLink } from "@medusajs/framework/utils"
 export default defineLink(
   {
     linkable: ProductModule.linkable.product,
-    isList: true,
+    isList:   true,
   },
   VendorModule.linkable.vendor
 )

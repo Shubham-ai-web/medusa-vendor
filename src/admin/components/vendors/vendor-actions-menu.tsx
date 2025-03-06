@@ -1,4 +1,4 @@
-import { 
+import {
   DropdownMenu,
   IconButton,
   clx,
@@ -12,14 +12,14 @@ export type Action = {
   disabled?: boolean
 } & (
   | {
-      to: string
-      onClick?: never
-    }
+  to: string
+  onClick?: never
+}
   | {
-      onClick: () => void
-      to?: never
-    }
-)
+  onClick: () => void
+  to?: never
+}
+  )
 
 export type ActionGroup = {
   actions: Action[]
@@ -34,7 +34,7 @@ export const ActionMenu = ({ groups }: ActionMenuProps) => {
     <DropdownMenu>
       <DropdownMenu.Trigger asChild>
         <IconButton size="small" variant="transparent">
-          <EllipsisHorizontal />
+          <EllipsisHorizontal/>
         </IconButton>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content>
@@ -90,7 +90,7 @@ export const ActionMenu = ({ groups }: ActionMenuProps) => {
                   </div>
                 )
               })}
-              {!isLast && <DropdownMenu.Separator />}
+              {!isLast && <DropdownMenu.Separator/>}
             </DropdownMenu.Group>
           )
         })}

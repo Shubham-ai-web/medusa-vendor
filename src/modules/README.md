@@ -1,6 +1,7 @@
 # Custom Module
 
-A module is a package of reusable functionalities. It can be integrated into your Medusa application without affecting the overall system. You can create a module as part of a plugin.
+A module is a package of reusable functionalities. It can be integrated into your Medusa application without affecting
+the overall system. You can create a module as part of a plugin.
 
 > Learn more about modules in [this documentation](https://docs.medusajs.com/learn/fundamentals/modules).
 
@@ -8,7 +9,8 @@ To create a module:
 
 ## 1. Create a Data Model
 
-A data model represents a table in the database. You create a data model in a TypeScript or JavaScript file under the `models` directory of a module.
+A data model represents a table in the database. You create a data model in a TypeScript or JavaScript file under
+the `models` directory of a module.
 
 For example, create the file `src/modules/blog/models/post.ts` with the following content:
 
@@ -25,7 +27,8 @@ export default Post
 
 ## 2. Create a Service
 
-A module must define a service. A service is a TypeScript or JavaScript class holding methods related to a business logic or commerce functionality.
+A module must define a service. A service is a TypeScript or JavaScript class holding methods related to a business
+logic or commerce functionality.
 
 For example, create the file `src/modules/blog/service.ts` with the following content:
 
@@ -43,7 +46,8 @@ export default BlogModuleService
 
 ## 3. Export Module Definition
 
-A module must have an `index.ts` file in its root directory that exports its definition. The definition specifies the main service of the module.
+A module must have an `index.ts` file in its root directory that exports its definition. The definition specifies the
+main service of the module.
 
 For example, create the file `src/modules/blog/index.ts` with the following content:
 

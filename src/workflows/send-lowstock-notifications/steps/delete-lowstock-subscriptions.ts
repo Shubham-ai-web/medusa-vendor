@@ -9,7 +9,7 @@ type DeleteLowstockSubscriptionsStepInput = InferTypeOf<typeof LowstockSubscript
 export const deleteLowstockSubscriptionStep = createStep(
   "delete-lowstock-subscription",
   async (
-    lowstockSubscriptions: DeleteLowstockSubscriptionsStepInput, 
+    lowstockSubscriptions: DeleteLowstockSubscriptionsStepInput,
     { container }
   ) => {
     const lowstockModuleService: LowstockModuleService = container.resolve(
@@ -19,14 +19,14 @@ export const deleteLowstockSubscriptionStep = createStep(
     // await lowstockModuleService.deleteLowstockSubscriptions(
     //   lowstockSubscriptions.map((subscription) => subscription.id)
     // )
-    
+
     return new StepResponse(undefined, lowstockSubscriptions)
   },
   async (lowstockSubscriptions, { container }) => {
     if (!lowstockSubscriptions) {
       return
     }
-    
+
     const restockModuleService: LowstockModuleService = container.resolve(
       LOWSTOCK_MODULE
     )

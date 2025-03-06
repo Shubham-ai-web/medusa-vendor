@@ -34,10 +34,10 @@ export async function POST(
   }
   const { result } = await createLowstockSubscriptionWorkflow(req.scope).run({
     input: {
-      variant_id: req.validatedBody.variant_id,
+      variant_id:       req.validatedBody.variant_id,
       sales_channel_id: salesChannelId,
-      user: {
-        email: req.validatedBody.email,
+      user:             {
+        email:   req.validatedBody.email,
         user_id: req.auth_context?.actor_id,
       },
     },

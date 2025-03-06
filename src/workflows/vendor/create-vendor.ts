@@ -61,7 +61,7 @@ export const createVendorWorkflow = createWorkflow(
     const vendor = createVendorStep(input);
     emitEventStep({
       eventName: "vendor.created",
-      data: {
+      data:      {
         id: vendor.id,
       },
     });

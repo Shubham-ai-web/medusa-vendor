@@ -19,8 +19,8 @@ export const updateVendorStep = createStep(
   async (prevData, { container }) => {
     const vendorModuleService: VendorModuleService =
       container.resolve(VENDOR_MODULE);
-    if(prevData) {
-        await vendorModuleService.updateVendors(prevData);
+    if (prevData) {
+      await vendorModuleService.updateVendors(prevData);
     }
   }
 );

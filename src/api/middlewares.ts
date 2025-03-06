@@ -11,17 +11,17 @@ export default defineMiddlewares({
   routes: [
     ...adminMiddlewares,
     {
-      matcher: "/admin/products",
-      method: ["POST"],
+      matcher:                 "/admin/products",
+      method:                  [ "POST" ],
       additionalDataValidator: {
         vendor_id: z.string().optional(),
       },
     },
     {
-      matcher: "/store/lowstock-subscriptions",
-      method: "POST",
+      matcher:     "/store/lowstock-subscriptions",
+      method:      "POST",
       middlewares: [
-        authenticate("customer", ["bearer", "session"], {
+        authenticate("customer", [ "bearer", "session" ], {
           allowUnauthenticated: true,
         }),
         validateAndTransformBody(PostStoreCreateLowstockSubscription),

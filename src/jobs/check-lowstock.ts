@@ -2,10 +2,10 @@ import { MedusaContainer } from "@medusajs/framework/types"
 import { sendLowstockNotificationsWorkflow } from "../workflows/send-lowstock-notifications"
 
 export default async function myCustomJob(container: MedusaContainer) {
-    await sendLowstockNotificationsWorkflow(container).run()
-  }
-  
-  export const config = {
-    name: "check-lowstock",
-    schedule: "* * * * *", // For debugging, change to `* * * * *`
-  }
+  await sendLowstockNotificationsWorkflow(container).run()
+}
+
+export const config = {
+  name:     "check-lowstock",
+  schedule: "* * * * *", // For debugging, change to `* * * * *`
+}

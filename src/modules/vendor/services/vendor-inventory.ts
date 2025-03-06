@@ -22,7 +22,7 @@ class VendorInventoryService extends MedusaService({
     return await this.baseRepository_.transaction(async (manager: EntityManager) => {
       return await manager.findAndCount(VendorInventory, selector, {
         ...config,
-        populate: ["vendor"]
+        populate: [ "vendor" ]
       });
     });
   }
@@ -48,7 +48,7 @@ class VendorInventoryService extends MedusaService({
       // Check if relationship already exists
       const existing = await manager.findOne(VendorInventory, {
         inventory_item_id: data.inventory_item_id,
-        vendor: data.vendor,
+        vendor:            data.vendor,
       });
 
       if (existing) {
@@ -71,7 +71,7 @@ class VendorInventoryService extends MedusaService({
     turnaround_days?: number;
     is_preferred?: boolean;
     inventory_item_id?: string;
-    vendor?: string;
+    vendor?: null | string;
   }) {
     delete data.vendor;
     delete data.inventory_item_id;
@@ -95,14 +95,14 @@ class VendorInventoryService extends MedusaService({
   async listByInventoryItem(inventoryItemId: string, config: Record<string, unknown> = {}) {
     return await this.listAndCount({ inventory_item_id: inventoryItemId }, {
       ...config,
-      populate: ["vendor"]
+      populate: [ "vendor" ]
     });
   }
 
   async listByVendor(vendorId: string, config: Record<string, unknown> = {}) {
     return await this.listAndCount({ vendor: vendorId }, {
       ...config,
-      populate: ["vendor"]
+      populate: [ "vendor" ]
     });
   }
 }
