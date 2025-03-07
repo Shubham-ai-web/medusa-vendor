@@ -122,9 +122,7 @@ export const VendorTable = ({
           </>
         ) : isFetching ? (
           <div className="flex h-[150px] w-full flex-col items-center justify-center gap-y-4 border-y">
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-              <Spinner className="animate-spin"/>
-            </div>
+            <Spinner className="animate-spin"/>
           </div>
         ) : (
           <div className="flex h-[150px] w-full flex-col items-center justify-center gap-y-4 border-y">

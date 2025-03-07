@@ -4,7 +4,7 @@ import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VendorInventoryForm } from "./vendor-inventory-form.tsx";
 import { CreateUpdateVendorInventoryDTO, VendorInventory } from "./types";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 const schema = zod.object({
   vendor:          zod.string().min(1, "Vendor is required").optional(),
@@ -48,6 +48,18 @@ export const VendorFormDrawer = ({
     resolver:      zodResolver(schema),
   });
 
+  const vendorsWithAssigned = useMemo(() => {
+    if (editingItem) {
+      const isAssignedVendorInList = availableVendors.some(
+        (vendor) => vendor.id === editingItem.vendor.id
+      );
+      if (!isAssignedVendorInList) {
+        return [ ...availableVendors, editingItem.vendor ];
+      }
+    }
+    return availableVendors;
+  }, [ availableVendors, editingItem ]);
+
   useEffect(() => {
     if (editingItem && open) {
       reset({
@@ -63,8 +75,6 @@ export const VendorFormDrawer = ({
   }, [ editingItem, open, reset ]);
 
   const handleFormSubmit = (formData: typeof initialFormValues) => {
-    console.log("formData", formData);
-
     const data: CreateUpdateVendorInventoryDTO = {
       inventory_item_id: inventoryItemId,
       price:             formData.price ?? 0,
@@ -91,7 +101,7 @@ export const VendorFormDrawer = ({
             error={error}
             errors={errors}
             control={control}
-            vendors={availableVendors}
+            vendors={vendorsWithAssigned}
             isEditing={!!editingItem}
           />
         </form>
