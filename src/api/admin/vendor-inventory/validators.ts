@@ -13,6 +13,7 @@ export const AdminPostVendorInventoryReq = z.object({
   price:             z.number(),
   turnaround_days:   z.number(),
   is_preferred:      z.boolean().optional().default(false),
+  inventory_sku:     z.string(),
 });
 
 export const AdminPutVendorInventoryReq = z.object({
@@ -21,6 +22,7 @@ export const AdminPutVendorInventoryReq = z.object({
   turnaround_days:   z.number(),
   is_preferred:      z.boolean(),
   vendor:            z.string().nullable().optional(),
+  inventory_sku:     z.string().nullable().optional(),
 });
 
 export type AdminGetVendorInventoryReqType = z.infer<typeof AdminGetVendorInventoryReq>;

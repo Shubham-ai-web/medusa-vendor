@@ -36,6 +36,9 @@ const createColumns = ({ handleEdit, openDeletePrompt }: ActionHandlers) => [
     cell:          (info) => info.getValue() ? "Yes" : "No",
     enableSorting: true,
   }),
+  columnHelper.accessor("inventory_sku", {
+    header: "Inventory SKU",
+  }),
   columnHelper.display({
     id:     "actions",
     header: "Actions",

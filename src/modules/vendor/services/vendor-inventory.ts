@@ -43,6 +43,7 @@ class VendorInventoryService extends MedusaService({
     price: number;
     turnaround_days: number;
     is_preferred?: boolean;
+    inventory_sku?: string;
   }) {
     return await this.baseRepository_.transaction(async (manager: EntityManager) => {
       // Check if relationship already exists
@@ -72,6 +73,7 @@ class VendorInventoryService extends MedusaService({
     is_preferred?: boolean;
     inventory_item_id?: string;
     vendor?: null | string;
+    inventory_sku?: string;
   }) {
     delete data.vendor;
     delete data.inventory_item_id;

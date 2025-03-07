@@ -17,7 +17,7 @@ export function VendorInventoryWidget({ inventoryItemId }: { inventoryItemId: st
   const [ isDeletePromptOpen, setIsDeletePromptOpen ] = useState(false);
   const [ vendorIdToDelete, setVendorIdToDelete ] = useState<string | null>(null);
   const queryClient = useQueryClient();
-  const PAGE_LIMIT = 1;
+  const PAGE_LIMIT = 10;
   const [ pagination, setPagination ] = useState<DataTablePaginationState>({
     pageSize:  PAGE_LIMIT,
     pageIndex: 0,

@@ -11,6 +11,7 @@ const schema = zod.object({
   price:           zod.number().min(0, "Price must be non-negative"),
   turnaround_days: zod.number().min(1, "Turnaround days must be at least 1"),
   is_preferred:    zod.boolean(),
+  inventory_sku:   zod.string().min(1, "Inventory SKU is required").optional(),
 });
 
 interface VendorFormDrawerProps {
@@ -39,6 +40,7 @@ export const VendorFormDrawer = ({
     price:           0,
     turnaround_days: 0,
     is_preferred:    false,
+    inventory_sku:   "",
   };
 
   const { handleSubmit, register, control, reset, formState: { errors } } = useForm({
@@ -53,6 +55,7 @@ export const VendorFormDrawer = ({
         turnaround_days: editingItem.turnaround_days || 0,
         is_preferred:    editingItem.is_preferred,
         vendor:          editingItem.vendor.id,
+        inventory_sku:   editingItem.inventory_sku || "",
       });
     } else if (!editingItem && open) {
       reset(initialFormValues);
@@ -60,11 +63,14 @@ export const VendorFormDrawer = ({
   }, [ editingItem, open, reset ]);
 
   const handleFormSubmit = (formData: typeof initialFormValues) => {
+    console.log("formData", formData);
+
     const data: CreateUpdateVendorInventoryDTO = {
       inventory_item_id: inventoryItemId,
       price:             formData.price ?? 0,
       turnaround_days:   formData.turnaround_days ?? 0,
       is_preferred:      formData.is_preferred,
+      inventory_sku:     formData.inventory_sku ?? "",
       ...(formData.vendor && { vendor: formData.vendor }),
     };
     onSubmit(data);

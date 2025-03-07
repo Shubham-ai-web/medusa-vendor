@@ -6,6 +6,7 @@ type FormValues = {
   price: number;
   turnaround_days: number;
   is_preferred: boolean;
+  inventory_sku: string;
 };
 
 interface VendorInventoryFormProps {
@@ -103,6 +104,23 @@ export function VendorInventoryForm({
               />
               {errors.turnaround_days && (
                 <span className="text-red-500 text-sm">{errors.turnaround_days.message}</span>
+              )}
+            </div>
+            <div className="flex flex-col space-y-2">
+              <Label htmlFor="inventory_sku" size="xsmall">
+                Inventory SKU
+              </Label>
+              <Input
+                id="inventory_sku"
+                type="text"
+                placeholder="SKU"
+                disabled={loading}
+                {...register("inventory_sku", {
+                  required: "Inventory SKU is required",
+                })}
+              />
+              {errors.inventory_sku && (
+                <span className="text-red-500 text-sm">{errors.inventory_sku.message}</span>
               )}
             </div>
           </div>

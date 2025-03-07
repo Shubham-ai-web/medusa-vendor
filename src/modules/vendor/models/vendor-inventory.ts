@@ -8,4 +8,5 @@ export const VendorInventory = model.define("vendor_inventory", {
   price:             model.number(),
   turnaround_days:   model.number(),
   is_preferred:      model.boolean().default(false),
+  inventory_sku:     model.text().nullable(),
 }); 

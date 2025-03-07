@@ -4,6 +4,7 @@ export type VendorInventory = {
   price: number | null;
   turnaround_days: number | null;
   is_preferred: boolean;
+  inventory_sku: string | null;
   vendor: {
     id: string;
     first_name: string;
@@ -28,6 +29,7 @@ export type CreateUpdateVendorInventoryDTO = {
   price: number;
   turnaround_days: number;
   is_preferred: boolean;
+  inventory_sku?: string;
 };
 
 export type Vendor = {
